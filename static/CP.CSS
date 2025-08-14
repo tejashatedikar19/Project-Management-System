@@ -1,0 +1,305 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Container for Centering Content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.search-bar {
+    margin-left: auto; 
+}
+
+.search-bar input[type=text] {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 6px 10px;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #16a085;
+}
+
+/* Main Content Sections */
+section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Styles for Sign Up and Sign In Pages */
+.signup-container, .signin-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+h2 {
+    text-align: center;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Section Styles */
+section h2 {
+   font-size: 2em;
+   margin-bottom: 15px;
+   color: #34495e;
+}
+
+section p { 
+   font-size: 1em;
+   color: #7f8c8d;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #2c3e50;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+nav .logo{
+    flex:1;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+nav .logo a {
+    color: #ecf0f1;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-decoration: none;
+
+  
+}
+
+nav .nav-links {
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+    margin: 0;
+}
+
+nav .nav-links li {
+    margin: 0 15px;
+}
+
+nav .nav-links a {
+    color: #ecf0f1;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav .nav-links a:hover {
+    color: #1abc9c;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    font-size: 2em;
+    color: #ecf0f1;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+nav .nav-links-mobile {
+    color: #ecf0f1;
+    display: none;
+    flex-direction: column;
+    background-color: #2c3e50;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+nav .nav-links-mobile li {
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav .nav-links-mobile a {
+    padding: 10px 20px;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    nav .nav-links {
+        display: none; 
+    }
+
+    .hamburger {
+        display: block; 
+    }
+
+    nav .nav-links-mobile.active {
+        display: flex; 
+    }
+
+    .search-bar {
+        display: none; 
+    }
+}
+
+/* Hero Section */
+.hero {
+    background-color: rgb(255, 234, 207);
+    color: black;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.hero-content h1, p {
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #27ae60;
+}
+
+/* Main Content */
+.content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.section-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    height: 150px;
+    margin: 10px 0;
+}
+
+.section-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #2ecccc;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr; 
+    }
+
+    .section-box {
+        height: auto; 
+    }
+}
+
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Timelines Page Specific Styles */
+.timeline {
+    padding: 40px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.timeline h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+.timeline-entry {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 4px solid #1abc9c;
+    background-color: #f9f9f9;
+}
+
+.timeline-entry h3 {
+    font-size: 1.5em;
+    margin: 0 0 5px;
+    color: #2c3e50;
+}
+
+.timeline-entry p {
+    margin: 5px 0;
+}
+
+/* Timelines Section Centering */
+.content {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+}

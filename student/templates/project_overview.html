@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Overview</title>
+    <link rel="stylesheet" href="{% static 'project_overview.css' %}"> 
+
+    <style>
+        .logout-button {
+            background-color: #ff4d4d; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            max-width: 18rem;
+        }
+
+        .logout-button:hover {
+            background-color: #ff1a1a; 
+        }
+
+        .logout-button:active {
+            background-color: #e60000; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+        }
+
+        .view-project {
+            background-color: #4d97ff; 
+            color: white;
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        }
+
+        .view-project:hover {
+            background-color: #1a72ff; 
+        }
+
+        .view-project:active {
+            background-color: #0060e6; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+        }
+
+        .logout-button {
+            background-color: #ff4d4d; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            max-width: 18rem;
+        }
+
+        .logout-button:hover {
+            background-color: #ff1a1a; 
+        }
+
+        .logout-button:active {
+            background-color: #e60000; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+        }
+
+        @media (max-width: 786px ){
+            .mobile-hide{
+                display: none;
+            
+        }
+        }
+
+        footer{
+            width: 100%;
+        }
+
+        @media (max-width: 768px){
+            table th, table td{
+                padding: 2px;
+                flex-wrap: wrap;
+            }
+
+            .content, .container{
+                padding: 5px !important;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px){
+            nav .logo a{
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="#">Major Project Management</a>
+            </div>
+
+            <!-- Hamburger Menu for Mobile -->
+            <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+            <!-- Desktop Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="{% url 'timeline' %}">Timelines</a></li>
+                <li><a href="{% url 'sdomain' %}">Domains</a></li>
+                <!-- <li><a href="project_overview.html">All Projects</a></li> -->
+                <li><a href="{% url 'shome' %}">My Project</a></li>
+                <li><a href="{% url 'groupmate' %}">Group Details</a></li>
+                <li><a href="{% url 'logout' %}"><button class="logout-button">Logout</button></a></li>
+            </ul>
+
+            <!-- Mobile Navigation Links -->
+            <ul class="nav-links-mobile">
+
+                <li><button style=" font-size: 1.5rem;width: 3rem ;border-radius: 10px ;" onclick="toggleMenu()">&#x2716;</button>
+                </li>
+                <li><a style="color: aliceblue; text-decoration: none ;"  href="{% url 'timeline' %}"><b>Timelines</b></a></li>
+                <li><a style="color: aliceblue; text-decoration: none ;" href="{% url 'sdomain' %}"><b>Domains</b></a></li>
+                <!-- <li><a style="color: aliceblue; text-decoration: none ;"href="project_overview.html"><b>All Projects</b></a></li> -->
+                <li><a style="color: aliceblue; text-decoration: none ;" href="{% url 'shome' %}"><b>My Project</b></a></li>
+                <li><a style="color: aliceblue; text-decoration: none ;"href="{% url 'groupmate' %}"><b>Group Details</b></a></li> 
+                <li><a style="color: aliceblue; text-decoration: none ;"href="{% url 'logout' %}"><button class="logout-button">Logout</button></a></li> 
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="content">
+            <h2>Project Overview</h2>
+            <p>Details about various projects, including group number, project titles, descriptions, guides, and tags.</p>
+
+            <!-- Project Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Group No.</th>
+                        <th>Project Title</th>
+                        <th class="mobile-hide">Project Description</th>
+                        <th class="mobile-hide">Guide</th>
+                        <th class="mobile-hide">Tags</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if groups %}
+                        {% for group in groups %}
+                            {% if group.pname != 'Name of the projectt' and group.pname %}
+                                <tr>
+                                    <td>{{ group.group_id }}</td>
+                                    <td>{{ group.pname }}</td>
+                                    <td class="mobile-hide">{{ group.description }}</td>
+                                    <td class="mobile-hide">{{ group.guide }}</td>
+                                    <td class="mobile-hide">{{ group.tags }}</td>
+                                    <td>
+                                        <form action="{% url 'viewProject' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="email" value="{{group.email}}">
+                                            <button type="submit" class="view-project">View Project</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">No projects found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 Major Project Management. All rights reserved.
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-links-mobile');
+            menu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>

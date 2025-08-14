@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Major Project Management</title>
+    <link rel="stylesheet" href="CP.CSS">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="container">
+        <div class="logo">
+            <a href="CP.HTML">Major Project Management</a>
+        </div>
+
+        <!-- Hamburger Menu for Mobile -->
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="timelines.html">Timelines</a></li>
+            <li><a href="domain.html">Domain</a></li>
+            <li><a href="project_overview.html">All Projects</a></li>
+            <li><a href="project.html"> My Project</a></li>
+            <li><a href="groupmate_data.html"> Groupmate data</a></li>
+            <li><a href="register.html">Signup</a></li> 
+        </ul>
+
+        <!-- Mobile Navigation Links -->
+        <ul class="nav-links-mobile">
+            <li><a style="color: aliceblue; text-decoration: none ;"  href="timelines.html"><b>Timelines</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;" href="domain.html"><b>Domain</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;"href="project_overview.html"><b>All Projects</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;" href="project.html"><b>Project</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;"href='groupmate_data.html'><b>Groupmate data</b></a></li> 
+            <li><a style="color: aliceblue; text-decoration: none ;"href="register.html"><b>Signup</b></a></li> 
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Major Project Management</h1>
+        <p>Organize, track, and manage your Major projects effectively.</p>
+        <a href="#project" class="cta-button">Get Started</a>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="content">
+    <a href="timelines.html" class="section-box">
+        <h2>Timelines</h2>
+        <p>Keep track of your project deadlines and milestones.</p>
+    </a>
+
+    <a href="domain.html" class="section-box">
+        <h2>Domain</h2>
+        <p>Classify your projects into different domains.</p>
+    </a>
+
+    <a href='display_projects.php' class="section-box">
+        <h2>All Projects</h2>
+        <p>Store and manage all project-related documents.</p>
+    </a>
+
+    <a href="project.html" class="section-box">
+        <h2>Project</h2>
+        <p>View and manage all your course projects in one place.</p>
+    </a>
+</section>
+
+<!-- Include JavaScript -->
+<script src="search.js"></script>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Course Project Management. All rights reserved.</p>
+</footer>
+
+<script>
+// JavaScript function to toggle the mobile menu
+function toggleMenu() {
+    const menu = document.querySelector('.nav-links-mobile');
+    menu.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

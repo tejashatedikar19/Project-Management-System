@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Requests</title>
+    <link rel="stylesheet" href="{% static 'project_overview.css' %}">
+    <style>
+        .section-box {
+            width: 60%;
+            padding: 15px;
+            margin: 15px auto;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            text-align: center;
+        }
+
+        .section-box:hover {
+            transform: translateY(-3px);
+            background-color: #e9ecef;
+        }
+
+        /* Table styling */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .cta-button {
+            padding: 8px 18px;
+            font-size: 0.85em;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #28a745;
+            border: none;
+            cursor: pointer;
+            margin: 0;
+            max-width: 6rem;
+        }
+
+        .cta-button:hover {
+            background-color: #218838;
+        }
+
+        .cta-button.reject {
+            background-color: #e74c3c;
+        }
+
+        .cta-button.reject:hover {
+            background-color: #c0392b;
+        }
+        .logout-button {
+            background-color: #ff4d4d; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            max-width: 18rem;
+        }
+
+        .logout-button:hover {
+            background-color: #ff1a1a; 
+        }
+
+        .logout-button:active {
+            background-color: #e60000; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+            
+        }
+
+        @media (max-width: 768px){
+            table th, table td{
+                padding: 8px;
+                flex-wrap: wrap;
+            }
+
+            .content, .container{
+                padding: 5px !important;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+
+        @media (max-width: 768px){
+            nav .logo a{
+                font-size: 1.5em;
+            }
+        }
+
+        footer{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="CP.HTML">Major Project Management</a>
+            </div>
+            <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+            <ul class="nav-links">
+                <!-- <li><a href="timelines.html">Timelines</a></li> -->
+                <li><a href="{% url 'fdomain' %}">Domains</a></li>
+                <!-- <li><a href="project_overview.html">All Projects</a></li> -->
+                <li><a href="{% url 'fmyProjects' %}">My Projects</a></li>
+                <li><a href="{% url 'fhome' %}">My Profile</a></li>
+                <li><a href="{% url 'frequest' %}">Group Requests</a></li>
+                <li><a href="{% url 'logout' %}"><button class="logout-button">Logout</button></a></li>
+            </ul>
+            <ul class="nav-links-mobile">
+                <li><button style=" font-size: 1.5rem;width: 3rem ;border-radius: 10px ;" onclick="toggleMenu()">&#x2716;</button>
+                </li>
+                <!-- <li><a style="color: aliceblue; text-decoration: none;" href="timelines.html"><b>Timelines</b></a></li> -->
+                <li><a style="color: aliceblue; text-decoration: none;" href="{% url 'fdomain' %}"><b>Domains</b></a></li>
+                <!-- <li><a style="color: aliceblue; text-decoration: none;" href="project_overview.html"><b>All Projects</b></a></li> -->
+                <li><a style="color: aliceblue; text-decoration: none;" href="{% url 'fmyProjects' %}"><b>My Projects</b></a></li>
+                <li><a style="color: aliceblue; text-decoration: none;" href="{% url 'fhome' %}"><b>My Profile</b></a></li>
+                <li><a style="color: aliceblue; text-decoration: none;" href="{% url 'frequest' %}"><b>Group Requests</b></a></li>
+                <li><a style="color: aliceblue; text-decoration: none;" href="{% url 'logout' %}"><button class="logout-button">Logout</button></a></li> 
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Group Requests Content Section -->
+    <section class="content">
+        <h2>Group Requests</h2>
+        <p>Here are the group requests that you have received:</p>
+
+        <!-- Requests Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Group Name</th>
+                    <th>Group Leader</th>
+                    <th>Contact Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.group_id }}</td>
+                    <td>{{ req.sname }}</td>
+                    <td>{{ req.contact_num }}</td>
+                    <td style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                        <form action="{% url 'frequest' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ req.group_id }}">
+                            <input type="hidden" name="approve" value="Accept">
+                            <button class="cta-button" style="margin-bottom: 0.5rem;">Accept</button>
+                        </form>
+                        <form action="{% url 'frequest' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ req.group_id }}">
+                            <input type="hidden" name="reject" value="Reject">
+                            <button class="cta-button reject">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Teacher Dashboard - Major Project Management. All rights reserved.</p>
+    </footer>
+    
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-links-mobile');
+            menu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>

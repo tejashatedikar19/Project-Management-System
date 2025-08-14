@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timelines - Major Project Management</title>
+    <link rel="stylesheet" href="{% static 'CP.CSS' %}">
+
+    <style>
+        .logout-button {
+            background-color: #ff4d4d; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            max-width: 18rem;
+        }
+
+        .logout-button:hover {
+            background-color: #ff1a1a; 
+        }
+
+        .logout-button:active {
+            background-color: #e60000; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+        }
+
+        footer {
+            background-color: #2c3e50;
+        }
+
+        @media (max-width: 768px){
+            nav .logo a{
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="container">
+        <div class="logo">
+            <a href="#">Major Project Management</a>
+        </div>
+
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="{% url 'timeline' %}">Timelines</a></li>
+            <li><a href="{% url 'sdomain' %}">Domains</a></li>
+            <li><a href="{% url 'shome' %}">My Project</a></li>
+            <li><a href="{% url 'groupmate' %}">Group Details</a></li> 
+            <li><a href="{% url 'logout' %}"><button class="logout-button">Logout</button></a></li>
+        </ul>
+
+        <!-- Mobile Navigation Links -->
+        <ul class="nav-links-mobile">
+
+            <li><button style=" font-size: 1.5rem;width: 3rem ;border-radius: 10px ;" onclick="toggleMenu()">&#x2716;</button>
+            </li>
+            <li><a style="color: aliceblue; text-decoration: none ;"  href="{% url 'timeline' %}"><b>Timelines</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;" href="{% url 'sdomain' %}"><b>Domains</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;" href="{% url 'shome' %}"><b>My Project</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;" href="{% url 'groupmate' %}"><b>Group Details</b></a></li>
+            <li><a style="color: aliceblue; text-decoration: none ;"href="{% url 'logout' %}"><button class="logout-button">Logout</button></a></li>  
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Timelines</h1>
+        <p>Keep track of your project deadlines and milestones here.</p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="content" style="padding: 0;">
+    <div class="timeline" style="width: 40rem;">
+        <h2>Project Timeline</h2>
+        <p>Here's where you can see your project timelines.</p>
+        
+        <div class="timeline-entry">
+            <h3>Problem Statement Submission</h3>
+            <p>Date: <strong>{{ PS_date }}</strong></p>
+            <!-- <p>Description: Start of the project with initial team meeting.</p> -->
+            <strong style="background-color: rgb(92, 184, 249); padding: 0.3rem 2rem;"><big id="kickoff-timer" class="timers">Timer: <span class="countdown">Not Started</span></big></strong>
+        </div>
+        <div class="timeline-entry">
+            <h3>Mid-Semester Assessment Submission</h3>
+            <p>Date: <strong>{{midsem_date}}</strong></p>
+            <!-- <p>Description: Complete the first phase of the project.</p> -->
+            <strong style="background-color: rgb(92, 184, 249); padding: 0.3rem 2rem;"><big id="phase1-timer" class="timers">Timer: <span class="countdown">Not Started</span></big></strong>
+        </div>
+        <div class="timeline-entry">
+            <h3>End-Semester Assessment Submission</h3>
+            <p>Date: <strong>{{endsem_date}}</strong></p>
+            <!-- <p>Description: Review project outcomes and document results.</p> -->
+            <strong style="background-color: rgb(92, 184, 249); padding: 0.3rem 2rem;"><big id="finalreview-timer" class="timers">Timer: <span class="countdown">Not Started</span></big></strong>
+        </div>
+    </div>
+</section>
+
+<script src="search.js"></script>
+
+<footer>
+    <p>&copy; 2024 Major Project Management. All rights reserved.</p>
+</footer>
+
+<script>
+// JavaScript function to toggle the mobile menu
+function toggleMenu() {
+    const menu = document.querySelector('.nav-links-mobile');
+    menu.classList.toggle('active');
+}
+
+// Function to start the countdown timer
+function startCountdown() {
+    const deadlines = [
+        { name: "Project Kick-off", date: new Date(`{{PS_date}}`).getTime(), elementId: "kickoff-timer" },
+        { name: "Phase 1 Completion", date: new Date(`{{midsem_date}}`).getTime(), elementId: "phase1-timer" },
+        { name: "Final Review", date: new Date(`{{endsem_date}}`).getTime(), elementId: "finalreview-timer" }
+    ];
+
+    const now = new Date().getTime();
+
+    deadlines.forEach(deadline => {
+        const timeRemaining = deadline.date - now;
+        const timerElement = document.querySelector(`#${deadline.elementId} .countdown`);
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+
+        if ((timeRemaining > 0) && (days <= 30)) {
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        } else if (timeRemaining <= 0) {
+            timers = document.querySelectorAll(".timers");
+
+            if (deadline["name"] == "Project Kick-off") {
+                timers[0].textContent = "Deadline is over!";
+            } else if (deadline["name"] == "Phase 1 Completion") {
+                timers[1].textContent = "Deadline is over!";
+            } else {
+                timers[2].textContent = "Deadline is over!";
+            }
+
+        } else {
+            timerElement.innerHTML = "Not Started";
+        }
+    });
+}
+
+setInterval(startCountdown, 1000);
+</script>
+
+</body>
+</html>

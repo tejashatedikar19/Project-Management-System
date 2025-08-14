@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project - Teacher Dashboard</title>
+    <link rel="stylesheet" href="CP.CSS">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8; /* Soft light background */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #2c3e50; /* Dark background for nav */
+            color: white;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+        }
+
+        .nav-links a {
+            color: white; /* White color for nav links */
+            text-decoration: none;
+            padding: 10px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #34495e; /* Slightly lighter on hover */
+        }
+
+        .my-project-title {
+            text-align: center; /* Center the title */
+            font-size: 2.5em; /* Increase font size */
+            color: #e67e22; /* Title color */
+            margin: 30px 0; /* Add margin for spacing */
+        }
+
+        .project-table {
+            width: 90%; /* Width of the table */
+            margin: 0 auto; /* Center table */
+            border-collapse: collapse; /* Remove spacing between cells */
+            background-color: #ffffff; /* White background for table */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Shadow effect for table */
+        }
+
+        .project-table th, .project-table td {
+            border: 1px solid #bdc3c7; /* Border for table cells */
+            padding: 15px; /* Padding inside cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        .project-table th {
+            background-color: #2c3e50; /* Dark header background */
+            color: white; /* White text color for header */
+        }
+
+        .project-table tr:nth-child(even) {
+            background-color: #f9f9f9; /* Stripe effect for even rows */
+        }
+
+        .grade-remarks-form {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #1abc9c; /* Border color for form */
+            border-radius: 5px;
+            background-color: #f9f9f9; /* Light background for form */
+        }
+
+        .grade-remarks-form label {
+            display: block; /* Make labels block elements */
+            margin: 5px 0 3px; /* Space around labels */
+            color: #333; /* Label color */
+        }
+
+        .grade-remarks-form input, .grade-remarks-form textarea {
+            width: calc(100% - 22px); /* Full width minus padding/border */
+            padding: 10px; /* Padding inside input fields */
+            border-radius: 5px; /* Rounded corners for inputs */
+            border: 1px solid #ccc; /* Border for inputs */
+            margin-bottom: 10px; /* Space below inputs */
+        }
+
+        .grade-remarks-form button {
+            background-color: #1abc9c; /* Button color */
+            color: white; /* Text color for button */
+            border: none; /* Remove default border */
+            padding: 10px 15px; /* Padding inside button */
+            border-radius: 5px; /* Rounded corners for button */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background 0.3s;
+        }
+
+        .grade-remarks-form button:hover {
+            background-color: #16a085; /* Darker shade on hover */
+        }
+
+        footer {
+            text-align: center; /* Center footer text */
+            padding: 15px 0; /* Padding for footer */
+            background-color: #2c3e50; /* Same color as nav */
+            color: white; /* White text for footer */
+            position: relative; /* Positioning for footer */
+            bottom: 0;
+            width: 100%; /* Full width */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="container">
+        <div class="logo">
+            <a href="CP.HTML">Major Project Management</a>
+        </div>
+        
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="timelines.html">Timelines</a></li>
+            <li><a href="domain.html">Domain</a></li>
+            <li><a href="project_overview.html">All Projects</a></li>
+            <li><a href="project.html">My Project</a></li>
+            <li><a href="myprofile.html">My Profile</a></li>
+            <li><a href="register.html">Signup</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- My Project Section -->
+<section class="content">
+    <h2 class="my-project-title">My Project</h2>
+
+    <!-- Project Details Table -->
+    <table class="project-table">
+        <thead>
+            <tr>
+                <th>Project ID</th>
+                <th>Group Number</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Guide</th>
+                <th>Tags</th>
+                <th>Working Model</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example Project Row -->
+            <tr>
+                <td>001</td>
+                <td>1</td>
+                <td>Example Project Title</td>
+                <td>This is a description of the example project.</td>
+                <td>Dr. John Doe</td>
+                <td>AI, Machine Learning</td>
+                <td><a href="link_to_working_model">View Model</a></td>
+                <td>
+                    <form class="grade-remarks-form">
+                        <label for="grade_001">Grade:</label>
+                        <input type="text" id="grade_001" name="grade" required>
+
+                        <label for="remarks_001">Remarks:</label>
+                        <textarea id="remarks_001" name="remarks" rows="2" required></textarea>
+
+                        <button type="submit">Submit</button>
+                    </form>
+                </td>
+            </tr>
+            <!-- Example Project Row -->
+            <tr>
+                <td>002</td>
+                <td>2</td>
+                <td>Another Project Title</td>
+                <td>This is a description of another project.</td>
+                <td>Dr. Jane Smith</td>
+                <td>Web Development</td>
+                <td><a href="link_to_working_model">View Model</a></td>
+                <td>
+                    <form class="grade-remarks-form">
+                        <label for="grade_002">Grade:</label>
+                        <input type="text" id="grade_002" name="grade" required>
+
+                        <label for="remarks_002">Remarks:</label>
+                        <textarea id="remarks_002" name="remarks" rows="2" required></textarea>
+
+                        <button type="submit">Submit</button>
+                    </form>
+                </td>
+            </tr>
+            <!-- More project rows can be added here -->
+        </tbody>
+    </table>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Course Project Management. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
